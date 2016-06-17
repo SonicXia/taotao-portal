@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.taotao.portal.pojo.SearchResult;
 import com.taotao.portal.service.SearchService;
 
+/**
+ * 商品搜索Controller
+ * @author Administrator
+ *
+ */
 @Controller
 public class SearchController {
 	
@@ -30,7 +35,7 @@ public class SearchController {
 		SearchResult searchResult = searchService.search(queryString, page);
 		//向页面传递参数
 		model.addAttribute("query", queryString);
-		model.addAttribute("totalPage", searchResult.getPageCount());
+		model.addAttribute("totalPages", searchResult.getPageCount());
 		model.addAttribute("page", page);
 		model.addAttribute("itemList", searchResult.getItemList());
 		
