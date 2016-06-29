@@ -6,7 +6,10 @@ var TTCart = {
 		$(".increment").click(function(){//＋
 			var _thisInput = $(this).siblings("input");
 			_thisInput.val(eval(_thisInput.val()) + 1);
-			$.post("/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val() + ".action",function(data){
+			//alert("/cart/add/"+_thisInput.attr("itemId") + ".html");
+			//在web.xml中配置伪静态，要以.html或.action作为地址结尾
+			//ajax提交请求，页面不做跳转
+			$.post("/cart/add/"+_thisInput.attr("itemId") + ".action",function(data){
 				TTCart.refreshTotalPrice();
 			});
 		});
@@ -16,14 +19,16 @@ var TTCart = {
 				return ;
 			}
 			_thisInput.val(eval(_thisInput.val()) - 1);
-			$.post("/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val() + ".action",function(data){
+			$.post("/cart/add/"+_thisInput.attr("itemId") + ".html",function(data){
 				TTCart.refreshTotalPrice();
 			});
 		});
 		$(".quantity-form .quantity-text").rnumber(1);//限制只能输入数字
 		$(".quantity-form .quantity-text").change(function(){
 			var _thisInput = $(this);
-			$.post("/service/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val(),function(data){
+			//alert("/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val()); 
+			//注意，在结尾添加".html"
+			$.post("/cart/update/num/"+_thisInput.attr("itemId")+"/"+_thisInput.val() + ".html",function(data){
 				TTCart.refreshTotalPrice();
 			});
 		});
